@@ -14,7 +14,7 @@ let server =
     Tcp.Where_to_listen.of_port(port),
     ~on_handler_error=`Raise,
     (_, reader, writer) =>
-    Deferred.create(finished =>
+    Deferred.create(finished =>{
       let rec loop = () =>
         upon(
           Reader.read_line(reader),
@@ -31,7 +31,7 @@ let server =
         );
 
       loop();
-    )
+    })
   );
 
 let () = Core.eprintf("TOP\n%!");

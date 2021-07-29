@@ -3,7 +3,7 @@ open Async;
 
 let lines = file =>
   Reader.with_file(file, ~f=reader =>
-    Deferred.create(i =>
+    Deferred.create(i =>{
       let rec loop = ac =>
         upon(
           Reader.read_line(reader),
@@ -13,7 +13,7 @@ let lines = file =>
         );
 
       loop([]);
-    )
+    })
   );
 
 /*     (fun reader ->

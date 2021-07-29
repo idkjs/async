@@ -5,12 +5,12 @@ let num_jobs = 4096;
 let num_iters = 4096;
 
 let run_test = () =>
-  Deferred.create(i =>
+  Deferred.create(i =>{
     let rec loop = n =>
       if (n == 0) {
         Ivar.fill(i, ());
       } else {
-        Deferred.create(i =>
+        Deferred.create(i =>{
           let finished = ref(num_jobs);
           let rec loop = n =>
             if (n > 0) {
@@ -27,12 +27,12 @@ let run_test = () =>
             };
 
           loop(num_jobs);
-        )
+        })
         >>> (() => loop(n - 1));
       };
 
     loop(num_iters);
-  );
+  });
 
 let () = {
   let start = Time.now();

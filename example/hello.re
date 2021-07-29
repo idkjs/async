@@ -2,7 +2,7 @@ open Core;
 open Async;
 
 let handler = (_, reader, writer) =>
-  Deferred.create(i =>
+  Deferred.create(i =>{
     let write = () =>
       Writer.write(
         writer,
@@ -26,7 +26,7 @@ let handler = (_, reader, writer) =>
       );
 
     read();
-  );
+  });
 
 let () =
   ignore(
